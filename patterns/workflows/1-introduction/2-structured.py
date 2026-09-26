@@ -1,7 +1,10 @@
 import os
 
+from dotenv import load_dotenv
 from openai import OpenAI
 from pydantic import BaseModel
+
+load_dotenv()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -21,7 +24,7 @@ class CalendarEvent(BaseModel):
 # Step 2: Call the model
 # --------------------------------------------------------------
 
-completion = client.beta.chat.completions.parse(
+completion = client.chat.completions.parse(
     model="gpt-4o",
     messages=[
         {"role": "system", "content": "Extract the event information."},
@@ -37,7 +40,12 @@ completion = client.beta.chat.completions.parse(
 # Step 3: Parse the response
 # --------------------------------------------------------------
 
-event = completion.choices[0].message.parsed
-event.name
-event.date
-event.participants
+message = completion.choices[0].message
+if message.parsed is None:
+    raise ValueError(f"Model did not return an event: {message.refusal}")
+
+event = message.parsed
+print(event.name)
+print(event.date)
+print(event.participants)
+print(completion)
