@@ -1,2 +1,5 @@
-openai==1.97.1
-requests==2.33.0
+requests
+ipykernel
+python-dotenv
+openai
+pydantic
