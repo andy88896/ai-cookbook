@@ -1,8 +1,11 @@
 from typing import Optional, Literal
 from pydantic import BaseModel, Field
 from openai import OpenAI
+from dotenv import load_dotenv
 import os
 import logging
+
+load_dotenv()
 
 # Set up logging configuration
 logging.basicConfig(

@@ -3,9 +3,11 @@ import logging
 import os
 
 import nest_asyncio
+from dotenv import load_dotenv
 from openai import AsyncOpenAI
 from pydantic import BaseModel, Field
 
+load_dotenv()
 nest_asyncio.apply()
 
 # Set up logging configuration
