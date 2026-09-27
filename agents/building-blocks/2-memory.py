@@ -5,9 +5,14 @@ This component maintains conversation history and context to enable coherent mul
 More info: https://platform.openai.com/docs/guides/conversation-state?api-mode=responses
 """
 
+import os
+
+from dotenv import load_dotenv
 from openai import OpenAI
 
-client = OpenAI()
+load_dotenv()
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 def ask_joke_without_memory():

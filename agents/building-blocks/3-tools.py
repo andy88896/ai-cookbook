@@ -6,9 +6,13 @@ This component provides the capability to make API calls, database updates, file
 More info: https://platform.openai.com/docs/guides/function-calling?api-mode=responses
 """
 
+import os
 import json
 import requests
+from dotenv import load_dotenv
 from openai import OpenAI
+
+load_dotenv()
 
 
 def get_weather(latitude, longitude):
@@ -26,7 +30,7 @@ def call_function(name, args):
 
 
 def intelligence_with_tools(prompt: str) -> str:
-    client = OpenAI()
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
     tools = [
         {

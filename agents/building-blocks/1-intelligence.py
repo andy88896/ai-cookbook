@@ -5,11 +5,16 @@ This component handles context understanding, instruction following, and respons
 More info: https://platform.openai.com/docs/guides/text?api-mode=responses
 """
 
+import os
+
+from dotenv import load_dotenv
 from openai import OpenAI
+
+load_dotenv()
 
 
 def basic_intelligence(prompt: str) -> str:
-    client = OpenAI()
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     response = client.responses.create(model="gpt-4o", input=prompt)
     return response.output_text
 
