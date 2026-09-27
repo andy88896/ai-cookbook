@@ -2,13 +2,11 @@ import asyncio
 import logging
 import os
 
-import nest_asyncio
 from dotenv import load_dotenv
 from openai import AsyncOpenAI
 from pydantic import BaseModel, Field
 
 load_dotenv()
-nest_asyncio.apply()
 
 # Set up logging configuration
 logging.basicConfig(
@@ -116,7 +114,7 @@ async def run_valid_example():
     print(f"Is valid: {await validate_request(valid_input)}")
 
 
-asyncio.run(run_valid_example())
+await run_valid_example()
 
 # --------------------------------------------------------------
 # Step 5: Run suspicious example
@@ -130,4 +128,4 @@ async def run_suspicious_example():
     print(f"Is valid: {await validate_request(suspicious_input)}")
 
 
-asyncio.run(run_suspicious_example())
+await run_suspicious_example()
